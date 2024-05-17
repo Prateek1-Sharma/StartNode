@@ -1,18 +1,21 @@
 const express=require('express');
-
+const path=require('path');
 const router=express.Router();
 
-router.get("/add",(req,res,next)=>{
+const rootDir=require("../utils/path");
+
+router.get("/add-product",(req,res,next)=>{
     console.log("Add Product Page");
-    res.send("<h1>Hello from Express</h1><form action='/cart' method='POST'><input type='text' name='Product_title'><input type='number' name='Product_quantity'><button type='submit'>ADD Product</button> </form>");
+    res.sendFile(path.join(rootDir,"views","add-product.html"));
     // next();
 })
 
-router.post("/cart",(req,res,next)=>{
-    console.log("Cart Page");
-    console.log(req.body);
+router.get("/contact-us",(req,res,next)=>{
+    console.log("contact Page");
+   res.sendFile(path.join(rootDir,"views","contact.html"))
     // next();
 })
+
 
 
 module.exports=router;

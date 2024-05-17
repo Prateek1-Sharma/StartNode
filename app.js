@@ -1,4 +1,4 @@
-const http=require('http');
+const path=require('path');
 
 const adminRoutes=require('./Routes/admin');
 const shopRoutes=require('./Routes/shop');
@@ -12,9 +12,12 @@ app.use(bodyParser.urlencoded({extended:false}));
 
 app.use('/admin',adminRoutes);
 
-app.use(shopRoutes);
+app.use('/shop',shopRoutes);
+app.use('/success',(req,res)=>{
+    res.send("<h1>SUCCESSFULL</h1>")
+})
 
 app.use((req,res,next)=>{
-    res.status(404).send("<h1>Page Not found</h1>")
+    res.status(404).sendFile(path.join(__dirname,"views","404.html"))
     })
 app.listen(4000);
